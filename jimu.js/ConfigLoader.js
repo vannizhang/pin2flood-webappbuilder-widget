@@ -636,12 +636,12 @@ function (declare, lang, array, html, dojoConfig, cookie,
       if(portalUrlUtils.isOnline(processedPortalUrl)){
         processedPortalUrl = portalUrlUtils.updateUrlProtocolByOtherUrl(processedPortalUrl,
                                                                         appConfig.portalUrl);
-        if(appConfig.map.portalUrl){
-          if(portalUrlUtils.isSamePortalUrl(appConfig.portalUrl, appConfig.map.portalUrl)){
-            appConfig.map.portalUrl = processedPortalUrl;
-          }
-        }
-        appConfig.portalUrl = processedPortalUrl;
+        // if(appConfig.map.portalUrl){
+        //   if(portalUrlUtils.isSamePortalUrl(appConfig.portalUrl, appConfig.map.portalUrl)){
+        //     appConfig.map.portalUrl = processedPortalUrl;
+        //   }
+        // }
+        // appConfig.portalUrl = processedPortalUrl;
 
         //update proxy url
         if(appConfig.httpProxy && appConfig.httpProxy.url){
