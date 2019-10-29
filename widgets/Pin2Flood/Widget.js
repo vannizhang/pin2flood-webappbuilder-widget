@@ -17,11 +17,12 @@
 
 define(['dojo/_base/declare', 
   'jimu/BaseWidget',
+  'jimu/tokenUtils',
   'jimu/loaderplugins/jquery-loader!https://code.jquery.com/jquery-git1.min.js',
   "esri/layers/GraphicsLayer",
   "esri/graphic"
 ],
-function(declare, BaseWidget, $,
+function(declare, BaseWidget, tokenUtils, $,
   GraphicsLayer,
   Graphic
 ){
@@ -83,16 +84,9 @@ function(declare, BaseWidget, $,
     startup: function(){
       const map = this.map;
 
-      // this.setOauthData();
       this.initFloodPolygonLayer();
       this.initPindropLayer();
       this.addClickEventHandlerToMap(map);
-    },
-
-    setOauthData: function(){
-      const oauthData = this.getEsriAuthDataFromCookie();
-      this.userId = oauthData.userId;
-      this.token = oauthData.token;
     },
 
     onClose: function(){
@@ -145,8 +139,8 @@ function(declare, BaseWidget, $,
             // console.log('floodInnudationPolygon', floodInnudationPolygon);
             self.showFloodPolygon(floodInnudationPolygon);
 
-            // self.syncPin2FloodPolygon(floodInnudationPolygon);
-            // self.syncPinDrop(pindropGeometry, compositeid);
+            self.syncPin2FloodPolygon(floodInnudationPolygon);
+            self.syncPinDrop(pindropGeometry, compositeid);
           }
 
         }).catch(function(err){
@@ -231,7 +225,9 @@ function(declare, BaseWidget, $,
 
     // save the pin drop to a hosted feature service
     syncPinDrop: function(point, compositeid){
-      const oauthData = this.getEsriAuthDataFromCookie();
+      // const oauthData = this.getEsriAuthDataFromCookie();
+
+      const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
       const requestUrl = Config["pindrop-records"].url + '/addFeatures';
 
@@ -240,7 +236,7 @@ function(declare, BaseWidget, $,
       const feature2add = {
         "geometry": point,
         "attributes":{
-          "userid": oauthData.userId,
+          "userid": credential.userId,
           "compositeid": compositeid,
           "querytime":querytime,
         }
@@ -249,7 +245,7 @@ function(declare, BaseWidget, $,
       const params = {
         'features': JSON.stringify(feature2add),
         'f': 'json',
-        'token': oauthData.token
+        'token': credential.token
       };
 
       $.post( requestUrl, params)
@@ -300,7 +296,9 @@ function(declare, BaseWidget, $,
 
     syncPin2FloodPolygon: function(feature){
 
-      const oauthData = this.getEsriAuthDataFromCookie();
+      // const oauthData = this.getEsriAuthDataFromCookie();
+
+      const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
       const requestUrl = Config["flood-polygon-records"].url + '/addFeatures';
       // const FieldNameQueryTime = Config["flood-polygon-records"].fields.querytime;
@@ -312,7 +310,7 @@ function(declare, BaseWidget, $,
       const feature2add = {
         "geometry": feature.geometry,
         "attributes": {
-          'userId': oauthData.userId,
+          'userId': credential.userId,
           'compositeid': feature.attributes.compositeid,
           'pin_drop_time': querytime
         }
@@ -321,7 +319,7 @@ function(declare, BaseWidget, $,
       const params = {
         'features': JSON.stringify(feature2add),
         'f': 'json',
-        'token': oauthData.token
+        'token': credential.token
       };
 
       $.post( requestUrl, params)
@@ -380,26 +378,26 @@ function(declare, BaseWidget, $,
       this.clearPinDrop();
     },
 
-    // call this function to get 'token' or 'userId' that will be required when upload data
-    getEsriAuthDataFromCookie: function(){
-      const wab_auth = this.readCookie('wab_auth') || this.readCookie('esri_auth');
-      const oauthData = JSON.parse(decodeURIComponent(wab_auth));
-      return {
-        token: oauthData.token,
-        userId: oauthData.userId
-      };
-    },
+    // // call this function to get 'token' or 'userId' that will be required when upload data
+    // getEsriAuthDataFromCookie: function(){
+    //   const wab_auth = this.readCookie('wab_auth') || this.readCookie('esri_auth');
+    //   const oauthData = JSON.parse(decodeURIComponent(wab_auth));
+    //   return {
+    //     token: oauthData.token,
+    //     userId: oauthData.userId
+    //   };
+    // },
 
-    readCookie: function(name){
-      var nameEQ = name + "=";
-      var ca = document.cookie.split(';');
-      for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-      }
-      return null;
-    },
+    // readCookie: function(name){
+    //   var nameEQ = name + "=";
+    //   var ca = document.cookie.split(';');
+    //   for (var i = 0; i < ca.length; i++) {
+    //       var c = ca[i];
+    //       while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    //       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    //   }
+    //   return null;
+    // },
 
   });
 });

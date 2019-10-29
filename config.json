@@ -21,7 +21,7 @@
       "mainBackgroundColor": null
     }
   },
-  "portalUrl": "https://www.arcgis.com",
+  "portalUrl": "https://arcgis-content.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [
     "elevation2.arcgis.com"
@@ -225,7 +225,7 @@
     "itemId": "9f286647ac0845a9afde29e1b56fe09d",
     "mapOptions": {},
     "id": "map",
-    "portalUrl": "https://www.arcgis.com",
+    "portalUrl": "https://arcgis-content.maps.arcgis.com",
     "mapRefreshInterval": {
       "useWebMapRefreshInterval": true
     }
