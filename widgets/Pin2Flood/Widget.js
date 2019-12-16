@@ -46,7 +46,7 @@ function(declare, BaseWidget, tokenUtils, $,
       }
     },
     'pindrop-records': {
-      url: 'https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/PinDrops/FeatureServer/0',
+      // url: 'https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/PinDrops/FeatureServer/0',
       fields: {
         'querytime': {
           fieldName: 'querytime'
@@ -60,7 +60,7 @@ function(declare, BaseWidget, tokenUtils, $,
       }
     },
     'flood-polygon-records': {
-      url: 'https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/Pin2FloodPolygon/FeatureServer/0',
+      // url: 'https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/Pin2FloodPolygon/FeatureServer/0',
       fields: {
         'querytime': {
           fieldName: 'pin_drop_time'
@@ -229,7 +229,9 @@ function(declare, BaseWidget, tokenUtils, $,
 
       const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
-      const requestUrl = Config["pindrop-records"].url + '/addFeatures';
+      const serviceUrl = this.config.pin2FloodServices["pinDropRecords"].url;
+
+      const requestUrl = serviceUrl + '/addFeatures';
 
       const querytime = new Date().getTime();
 
@@ -300,10 +302,9 @@ function(declare, BaseWidget, tokenUtils, $,
 
       const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
-      const requestUrl = Config["flood-polygon-records"].url + '/addFeatures';
-      // const FieldNameQueryTime = Config["flood-polygon-records"].fields.querytime;
-      // const FieldNameUserId= Config["flood-polygon-records"].fields.userid;
-      // const FieldNameCompositeId = Config["flood-polygon-records"].fields.compositeid;
+      const serviceUrl = this.config.pin2FloodServices["floodPolygonRecords"].url;
+
+      const requestUrl = serviceUrl + '/addFeatures';
 
       const querytime = new Date().getTime();
 
@@ -377,27 +378,6 @@ function(declare, BaseWidget, tokenUtils, $,
       this.clearFloodPolygon();
       this.clearPinDrop();
     },
-
-    // // call this function to get 'token' or 'userId' that will be required when upload data
-    // getEsriAuthDataFromCookie: function(){
-    //   const wab_auth = this.readCookie('wab_auth') || this.readCookie('esri_auth');
-    //   const oauthData = JSON.parse(decodeURIComponent(wab_auth));
-    //   return {
-    //     token: oauthData.token,
-    //     userId: oauthData.userId
-    //   };
-    // },
-
-    // readCookie: function(name){
-    //   var nameEQ = name + "=";
-    //   var ca = document.cookie.split(';');
-    //   for (var i = 0; i < ca.length; i++) {
-    //       var c = ca[i];
-    //       while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-    //       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    //   }
-    //   return null;
-    // },
 
   });
 });
