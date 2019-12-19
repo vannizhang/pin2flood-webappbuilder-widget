@@ -1,10 +1,10 @@
 {
-    "pin2FloodServices": {
-        "pinDropRecords": {
-          "url": "https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/PinDrops/FeatureServer/0"
-        },
-        "floodPolygonRecords": {
-          "url": "https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/Pin2FloodPolygon/FeatureServer/0"
-        }
-    }
+  "pin2FloodServices": {
+      "pinDrops": {
+        "url": "https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/PinDrops/FeatureServer/0"
+      },
+      "pin2floodPolygons": {
+        "url": "https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/Pin2FloodPolygon/FeatureServer/0"
+      }
+  }
 }

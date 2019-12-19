@@ -229,7 +229,7 @@ function(declare, BaseWidget, tokenUtils, $,
 
       const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
-      const serviceUrl = this.config.pin2FloodServices["pinDropRecords"].url;
+      const serviceUrl = this.config.pin2FloodServices["pinDrops"].url;
 
       const requestUrl = serviceUrl + '/addFeatures';
 
@@ -302,7 +302,7 @@ function(declare, BaseWidget, tokenUtils, $,
 
       const credential = tokenUtils.getPortalCredential(this.appConfig.portalUrl);
 
-      const serviceUrl = this.config.pin2FloodServices["floodPolygonRecords"].url;
+      const serviceUrl = this.config.pin2FloodServices["pin2floodPolygons"].url;
 
       const requestUrl = serviceUrl + '/addFeatures';
 
