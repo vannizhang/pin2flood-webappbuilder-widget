@@ -7,9 +7,11 @@ _Please read this [tutorial](https://www.esri.com/about/newsroom/arcwatch/add-cu
 
 ### Create the Pin2Flood widget
 
-1. Make a copy of the [Pin2Flood](https://github.com/vannizhang/pin2flood-webappbuilder-widget/tree/master/widgets/Pin2Flood) folder.
+1. Download the Pin2Flood widget ZIP file from [here](https://github.com/vannizhang/pin2flood-webappbuilder-widget/blob/master/widgets/Pin2FloodWidget.zip).
 
-2. Paste it to the **widgets** floder under stemapp (e.g. `path/to/WAB/client/stemapp/widgets/`).
+2. Unzip it and and you will see a folder called Pin2Flood which contains all the relevant files needed for the Pin2Flood widget.
+
+3. Make a copy of the [Pin2Flood] folder and paste it to the **widgets** floder under stemapp (e.g. `path/to/WAB/client/stemapp/widgets/`).
 
 ### Create Feature Layers
 
