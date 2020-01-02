@@ -40,10 +40,10 @@ https://services.arcgis.com/jIL9msH9OI208GCb/arcgis/rest/services/Pin2Flood_Poly
 {
   "pin2FloodServices": {
       "pinDrops": {
-        "url": {URL-4-YOUR-WON-PIN-DROPS-LAYER}
+        "url": {URL-4-YOUR-OWN-PIN-DROPS-LAYER}
       },
       "pin2floodPolygons": {
-        "url": {URL-4-YOUR-WON-PIN2FLOOD-POLYGONS-LAYER}
+        "url": {URL-4-YOUR-OWN-PIN2FLOOD-POLYGONS-LAYER}
       }
   }
 }
